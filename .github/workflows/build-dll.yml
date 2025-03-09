@@ -23,7 +23,7 @@ jobs:
         run: |
           wget https://github.com/discord/discord-rpc/releases/download/v3.4.0/discord-rpc-win.zip
           unzip discord-rpc-win.zip
-          mv discord-rpc-win/win32-dynamic discord-rpc
+          mv discord-rpc/win32-dynamic discord-rpc
 
       - name: Build DLL
         run: |
