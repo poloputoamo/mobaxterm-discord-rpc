@@ -25,7 +25,7 @@ Add Discord Rich Presence functionality to MobaXterm.
 
 ### Steps:
 1. **Download Required Files**
-   - Get `MobaXterm.exe` and `discord-rpc.dll` from Releases (mobaxterm-(silence,complete) and change the name to MobaXterm.exe)
+   - Get `MobaXterm.exe`, `final.dll` and `discord-rpc.dll` from Releases (mobaxterm-(silence,complete) and change the name to MobaXterm.exe), (and for final.dll, the same)
 
 2. **Locate Installation Directory**
    ```cmd
@@ -36,6 +36,7 @@ Add Discord Rich Presence functionality to MobaXterm.
    - Backup original `MobaXterm.exe`
    - Replace with downloaded `MobaXterm.exe`
    - Add `discord-rpc.dll` to the directory
+   - Add `final.dll` to the directory
 
 4. **Restart MobaXterm**
    - Launch as administrator to ensure RPC functionality
