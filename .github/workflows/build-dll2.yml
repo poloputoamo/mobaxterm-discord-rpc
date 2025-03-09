@@ -1,0 +1,41 @@
+name: Build DLL for Windows - silence.cpp
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install mingw-w64
+        run: sudo apt update && sudo apt install -y mingw-w64
+
+      - name: Download and extract Discord RPC
+        run: |
+          wget https://github.com/discord/discord-rpc/releases/download/v3.4.0/discord-rpc-win.zip
+          unzip discord-rpc-win.zip
+
+      - name: Build DLL
+        run: |
+          set -e
+          i686-w64-mingw32-g++ -shared -o final.dll silence.cpp \
+          -I"discord-rpc/win32-dynamic/include" \
+          -L"discord-rpc/win32-dynamic/lib" \
+          -ldiscord-rpc -luser32 -static-libgcc -static-libstdc++ \
+          2>&1 | tee build.log
+
+
+      - name: Upload artifact (DLL)
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-dll
+          path: final.dll
