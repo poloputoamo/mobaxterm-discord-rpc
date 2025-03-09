@@ -23,14 +23,16 @@ jobs:
         run: |
           wget https://github.com/discord/discord-rpc/releases/download/v3.4.0/discord-rpc-win.zip
           unzip discord-rpc-win.zip
-          mv discord-rpc/win32-dynamic discord
 
       - name: Build DLL
         run: |
+          set -e
           i686-w64-mingw32-g++ -shared -o final.dll complete.cpp \
-          -I"discord/include" \
-          -L"discord/lib" \
-          -ldiscord-rpc -luser32 -static-libgcc -static-libstdc++
+          -I"discord-rpc/win32-dynamic/include" \
+          -L"discord-rpc/win32-dynamic/lib" \
+          -ldiscord-rpc -luser32 -static-libgcc -static-libstdc++ \
+          2>&1 | tee build.log
+
 
       - name: Upload artifact (DLL)
         uses: actions/upload-artifact@v4
